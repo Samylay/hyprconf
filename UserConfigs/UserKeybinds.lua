@@ -1,0 +1,22 @@
+-- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
+-- User keybinds (migrated from UserKeybinds.conf)
+
+local home = os.getenv("HOME")
+local mainMod = "SUPER"
+local files = "thunar"
+local term = "kitty"
+local scriptsDir = home .. "/.config/hypr/scripts"
+local UserScripts = home .. "/.config/hypr/UserScripts"
+
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("pkill rofi || rofi -show drun -modi drun,filebrowser,run,window")) -- Main Menu
+hl.bind(mainMod .. " + CTRL + F", hl.dsp.window.fullscreen({ mode = "maximized" })) -- fake full screen
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("pkill rofi || true && ags -t 'overview'"))
+hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(term)) -- terminal
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(files)) -- file manager
+hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd(UserScripts .. "/RofiCalc.sh")) -- calculator (qalculate)
+hl.bind(mainMod .. " + SHIFT + Return", hl.dsp.exec_cmd("pypr toggle term")) -- Dropdown terminal
+hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("pypr zoom")) -- Toggle Desktop Zoom
+hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd(UserScripts .. "/ZshChangeTheme.sh")) -- Change oh-my-zsh theme
+hl.bind("ALT_L + SHIFT_L", hl.dsp.exec_cmd(scriptsDir .. "/SwitchKeyboardLayout.sh"), { non_consuming = true }) -- Change keyboard layout
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("env MOZ_MARIONETTE=1 firefox"))
+hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "m+1" }))

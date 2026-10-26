@@ -1,0 +1,3 @@
+-- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
+-- Workspace rules (migrated from WorkspaceRules.conf, which had no active rules).
+-- Example: hl.workspace_rule({ workspace = "1", gaps_out = 0 })

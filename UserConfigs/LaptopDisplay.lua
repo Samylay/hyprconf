@@ -1,0 +1,3 @@
+-- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
+-- Laptop display config (migrated from LaptopDisplay.conf, which had no active settings).
+-- Add hl.monitor({...}) entries here for laptop-specific displays.
