@@ -42,7 +42,14 @@ notify_view() {
 		resp=$(${notify_cmd_shot} " Screenshot:" " Captured by Swappy")
 		case "$resp" in
 			action1)
-				swappy -f - <"$tmpfile"
+				annotated=$(mktemp --suffix=.png)
+				swappy -f - -o "$annotated" <"$tmpfile"
+				if [[ -s "$annotated" ]]; then
+					wl-copy -t image/png <"$annotated"
+				else
+					wl-copy -t image/png <"$tmpfile"
+				fi
+				rm -f "$annotated" "$tmpfile"
 				;;
 			action2)
 				rm "$tmpfile"
@@ -128,7 +135,15 @@ shotactive() {
 
 shotswappy() {
 	tmpfile=$(mktemp)
-	grim -g "$(slurp)" - >"$tmpfile" && notify_view "swappy"
+	grim -g "$(slurp)" - >"$tmpfile"
+	if [[ -s "$tmpfile" ]]; then
+		wl-copy -t image/png <"$tmpfile"
+		mv "$tmpfile" "$dir/$file"
+		"${sDIR}/Sounds.sh" --screenshot
+		notify-send -t 2000 -i "${iDIR}/picture.png" -h string:x-canonical-private-synchronous:shot-notify " Screenshot" " Copied to clipboard"
+	else
+		rm -f "$tmpfile"
+	fi
 }
 
 if [[ ! -d "$dir" ]]; then
